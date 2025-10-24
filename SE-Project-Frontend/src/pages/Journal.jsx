@@ -47,8 +47,8 @@ const Journal = () => {
   const filteredEntries = entries
     .filter(entry => {
       if (filter === 'all') return true;
-      if (filter === 'positive') return entry.mood.score > 6;
-      if (filter === 'negative') return entry.mood.score <= 4;
+      if (filter === 'positive') return entry.mood.score > 5;
+      if (filter === 'negative') return entry.mood.score <= 5;
       return true;
     })
     .filter(entry =>
