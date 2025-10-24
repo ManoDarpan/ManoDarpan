@@ -1,0 +1,74 @@
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+    font-size: 1.6em;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+    background: transparent ;
+}
+
+.support-text {
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+
+.help-anim{
+    width: 350px;
+    height: 350px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    
+}
+
+
+
+/* Responsive Design for Footer */
+
+@media screen and (max-width : 768px) {
+    .help-anim{
+        width: 200px;
+        height: 175px;
+    }
+}
+
+@media screen and (max-width : 900px) {
+    .support-text{
+        display: none;
+    }
+
+    .help-anim{
+        width: 200px;
+        height: 150px;
+    }
+}
+
+/* @media screen and (max-width: 768px) {
+    .bottom-section {
+        flex-direction: column;
+        font-size: 1.2em;
+        gap: 2rem;
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    .meditation-icon {
+        width: 8em;
+        height: 8em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bottom-section {
+        font-size: 1em;
+        gap: 1.5rem;
+    }
+    .meditation-icon {
+        width: 6em;
+        height: 6em;
+    }
+    
+} */

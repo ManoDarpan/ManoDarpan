@@ -1,0 +1,205 @@
+.dashboard-main {
+  flex-grow: 1;
+  padding: 2rem;
+  font-family: var(--font-calm);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  background-color: var(--surface-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(13, 18, 25, 0.06), 0 2px 6px rgba(13, 18, 25, 0.04);
+  border: 1px solid rgba(0,0,0,0.03);
+  text-align: center;
+}
+
+.welcome-card {
+  grid-column: span 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-content {
+  flex-grow: 1;
+}
+
+.progress-card {
+  grid-column: span 1;
+}
+
+.progress-overview-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .progress-overview-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .sleep-score {
+    flex: 1;
+    order: 1;
+  }
+
+  .charts-container {
+    flex: 3;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .chart {
+    flex: 1;
+    background: var(--bg-end);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* emoji labels on pie slices */
+  .recharts-text {
+    pointer-events: none; /* allow clicks to pass through to slices */
+  }
+
+  /* remove mobile tap highlight and default outlines on SVG/chart elements */
+  .chart, .chart svg, .recharts-surface, .recharts-pie, .recharts-pie-sector, .recharts-layer, .recharts-pie-label, .recharts-pie-label-line {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    outline: none;
+    touch-action: manipulation;
+  }
+
+  /* pill-style for active label inserted via foreignObject */
+  .pie-active-pill {
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* subtle highlight when chart area is active */
+  .chart :is(svg) { transition: transform 0.18s cubic-bezier(.2,.8,.2,1); }
+
+  /* style Recharts connector lines and labels */
+  .recharts-pie-label-line {
+    stroke: rgba(0,0,0,0.18);
+    stroke-width: 1px;
+  }
+
+  .recharts-pie-label {
+    font-weight: 700;
+    font-size: 18px;
+    paint-order: stroke;
+    -webkit-text-stroke: 0.5px rgba(255,255,255,0.55);
+  }
+
+  /* ensure labels sit above the pie */
+  .charts-container .recharts-surface { z-index: 1 }
+  .recharts-pie-label, .recharts-pie-label-line { z-index: 3 }
+
+  /* HTML overlay for emoji labels (keeps emojis visible even when pie re-renders) */
+  .pie-overlay { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+  .pie-overlay-label { color: var(--text-color); text-shadow: 0 1px 0 rgba(255,255,255,0.55); }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .dashboard-main { padding: 0; }
+    .dashboard-grid { gap: 0; }
+    .welcome-card, .progress-card { padding: 1rem; }
+    .progress-overview-content { gap: 1rem; flex-direction: column; }
+    .charts-container { flex-direction: column; gap: 1rem; }
+    .chart { height: 360px; }
+    .sleep-score { padding: 1rem; }
+    .welcome-card h2 { font-size: 1.25rem; }
+  }
+
+  @media (max-width: 420px) {
+    .pie-overlay-label { font-size: 16px; }
+    .welcome-card h2 { font-size: 1.05rem; }
+  }
+}
+
+.sleep-score {
+  background-color: var(--surface-color);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 18px rgba(13,18,25,0.05);
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .welcome-card {
+    grid-column: span 2;
+  }
+  .progress-card {
+    grid-column: span 2;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .dashboard-main {
+    padding: 0;
+  }
+  .card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .dashboard-grid {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    flex-direction: column;
+  }
+}
+
+/* increased gap between navbar and top cards on mobile */
+@media (max-width: 768px) {
+  .dashboard-main { padding-top: 0; }
+  .welcome-card { margin-top: 0.6rem; }
+  .progress-card { margin-top: 0.6rem; }
+}
+
+.welcome-card button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-card button:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateY(-2px);
+}

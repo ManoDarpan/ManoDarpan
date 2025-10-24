@@ -1,0 +1,121 @@
+/* --- Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Funnel+Display:wght@300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
+
+/* --- Global Styles & Fonts --- */
+:root {
+  --bg-start: #f5f7fa;
+  --bg-end: #eef2f7;
+  --text-color: #333d4b;
+  --text-color-light: #6b7281;
+  --surface-color: #ffffff;
+  --primary-color: #5A9A78;
+  --primary-hover-color: #4c8366;
+  --border-color: #e5e7eb;
+  --input-bg-color: transparent;
+  --placeholder-color: #a0aec0;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --ring-color: rgba(90, 154, 120, 0.5);
+  --sidebar-hover-bg: rgba(0, 0, 0, 0.05);
+  
+  --font-serif: 'Lora', serif;
+  --font-sans: 'Nunito Sans', sans-serif;
+  --font-calm: 'Quicksand' , 'sans-serif'
+}
+
+body.dark {
+  /* --bg-start: #1a202c; */
+  --bg-start: #292b2f;
+  /* --bg-end: #1a202c; */
+  --bg-end: #292b2f;
+  --text-color: #e2e8f0;
+  --text-color-light: #a0aec0;
+  /* --surface-color: #2d3748; */
+  --surface-color:  	#202225;
+  /* --primary-color: #4299e1; */
+  --primary-color: #7289da;
+  --primary-hover-color: #2b6cb0;
+  /* --border-color: #4a5568; */
+  --border-color:#515255;
+  --input-bg-color: transparent;
+  --placeholder-color: #718096;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Global responsive containers and utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Ensure dropdowns/menus/popovers are always opaque on public pages.
+   Some component styles set background: transparent which can make
+   dropdowns hard to read on certain backgrounds. This rule enforces
+   an opaque surface and a subtle shadow. */
+.dropdown-menu,
+.send-menu,
+.user-dropdown,
+.user-dropdown-container .dropdown-menu,
+.nav-links,
+.nav-links.active,
+.dropdown,
+.popover,
+.tooltip {
+  background-color: var(--surface-color) ;
+  color: var(--text-color) ;
+  /* border: 1px solid var(--border-color) !important;
+  box-shadow: 0 10px 20px var(--shadow-color) !important; */
+  backdrop-filter: none;
+  z-index: 100;
+}
+
+.dropdown-menu .dropdown-item,
+.user-dropdown .dropdown-item,
+.send-menu .dropdown-item {
+  background: transparent ;
+  /* color: var(--text-color) ; */
+}
+
+/* Typography scaling */
+h1, h2, h3, h4, h5 { margin: 0 }
+body { font-size: 16px; line-height: 1.45 }
+@media (max-width: 900px) {
+  body { font-size: 15px }
+}
+@media (max-width: 480px) {
+  body { font-size: 14px }
+}
+
+/* Make buttons and controls easier to tap on touch devices */
+button, .chat-send-btn, .end-chat-btn, .accept-btn, .save-btn {
+  min-height: 40px;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  
+}
+
+/* Sidebar stacking for mobile: use a single column with header + main stacked */
+@media (max-width: 900px) {
+  .chat-layout { flex-direction: column }
+  .chat-side { width: 100%; order: 2 }
+  .chat-main { order: 1 }
+  .chat-side .side-section { max-height: 28vh }
+}
+
+/* compact utilities */
+.muted { color: var(--text-color-light) }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0 }

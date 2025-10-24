@@ -1,0 +1,109 @@
+/* Emotion styles for journal entries */
+
+.entry-item {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.entry-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.entry-title {
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+.emotion-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.emotion-tag {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 14px;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  text-transform: capitalize;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.emotion-tag-sm {
+  font-size: 0.6875rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.emotion-tag:hover {
+  opacity: 1;
+}
+
+/* Positive Emotions */
+.emotion-joy { background-color: #FFD93D; color: #333; text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+.emotion-admiration { background-color: #FF8F3F; }
+.emotion-amusement { background-color: #FAC213; }
+.emotion-approval { background-color: #6BCB77; }
+.emotion-caring { background-color: #FF8DC7; }
+.emotion-excitement { background-color: #FF6B6B; }
+.emotion-gratitude { background-color: #8B1874; }
+.emotion-love { background-color: #FF597B; }
+.emotion-optimism { background-color: #FFA41B; color: #333; text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+.emotion-pride { background-color: #FFB100; color: #333; text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+.emotion-relief { background-color: #95BDFF; color: #333; text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+
+/* Negative Emotions */
+.emotion-anger { background-color: #D71313; }
+.emotion-annoyance { background-color: #FF8787; }
+.emotion-disgust { background-color: #379237; }
+.emotion-disappointment { background-color: #7C81AD; }
+.emotion-disapproval { background-color: #9B0000; }
+.emotion-embarrassment { background-color: #FF8F8F; }
+.emotion-fear { background-color: #2D3250; }
+.emotion-grief { background-color: #1640D6; }
+.emotion-remorse { background-color: #6C9BCF; }
+.emotion-sadness { background-color: #4477CE; }
+
+/* Cognitive Emotions */
+.emotion-confusion { background-color: #9376E0; }
+.emotion-curiosity { background-color: #59B4C3; }
+.emotion-realization { background-color: #40A2D8; }
+
+/* Other Emotions */
+.emotion-desire { background-color: #F65A83; }
+.emotion-nervousness { background-color: #B15EFF; }
+.emotion-surprise { background-color: #FFB84C; color: #333; text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+.emotion-neutral { background-color: #748DA6; }
+
+/* Add transitions and effects */
+.emotion-tag {
+  transition: all 0.2s ease;
+}
+
+.emotion-tag:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.emotion-score-fill {
+  transition: all 0.3s ease;
+}
+
+.emotion-score-bar:hover .emotion-score-fill {
+  filter: brightness(1.05);
+  opacity: 1;
+}

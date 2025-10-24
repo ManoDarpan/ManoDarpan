@@ -1,0 +1,116 @@
+.journal-page-container {
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  font-family: var(--font-calm);
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.journal-header h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.journal-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.journal-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.journal-controls input,
+.journal-controls select {
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  max-width: 100%;
+}
+
+.journal-controls input:focus,
+.journal-controls select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--ring-color);
+}
+
+.journal-entries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-right: 1rem; /* avoid accidental right overflow on small screens */
+}
+
+.journal-entry-card {
+  background-color: var(--surface-color);
+  border: none;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.journal-entry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px var(--shadow-color);
+}
+
+.journal-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.journal-card-mood {
+  font-size: 1.75rem;
+}
+
+.journal-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.journal-card-date {
+  font-size: 0.875rem;
+  color: var(--text-secondary-color);
+}
+
+@media (max-width: 900px) {
+  .journal-page-container {
+    padding: 1rem;
+    overflow-x: hidden;
+  }
+  .journal-entry-card {
+    padding: 1rem;
+    border-radius: 0;
+  }
+  .journal-entries-grid {
+    gap: 1rem;
+  }
+}

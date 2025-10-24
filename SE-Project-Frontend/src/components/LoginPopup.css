@@ -1,0 +1,166 @@
+/* ================================
+   Role Switch
+================================ */
+.role-switch-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.role-switch {
+  position: relative;
+  display: flex;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 2rem;
+  width: 280px;
+  height: 48px;
+  overflow: hidden;
+}
+
+.role-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.35s ease;
+  color: var(--text-color-light); /* inactive text color */
+}
+
+
+.role-btn.active {
+  color: #fff; /* text color on active indicator */
+}
+
+.switch-indicator {
+  position: absolute;
+  top: 4px;
+  width: calc(50% - 8px);
+  height: calc(100% - 8px);
+  border-radius: 2rem;
+  z-index: 1;
+  transition: all 0.35s ease;
+  background-color: var(--primary-color);
+}
+
+.switch-indicator.user {
+  left: 4px;
+}
+
+.switch-indicator.counsellor {
+  left: calc(50% + 4px);
+}
+
+/* The app already defines color variables in `src/index.css` (:root and body.dark).
+   Use those global variables so the popup inherits both light and dark themes.
+   Example globals available: --surface-color, --text-color, --text-color-light,
+   --primary-color, --shadow-color, --sidebar-hover-bg, etc. */
+
+/* ================================
+   Modal / Overlay
+================================ */
+.login-popup-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* overlay uses a semi-opaque black for legibility; this works well with both themes */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  padding: 2rem;
+  
+}
+
+.login-popup-content {
+  width: min(540px, 100%);
+  /* use app surface color (adapts via body.dark) */
+  background: var(--surface-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  padding: 1.5rem 1.25rem;
+  /* use shadow color from global theme */
+  box-shadow: 0 12px 40px var(--shadow-color);
+  position: relative;
+  max-height: calc(100vh - 4rem);
+  overflow: auto;
+  align-items: center;
+  text-align: center;
+}
+
+/* ================================
+   Animations
+================================ */
+@keyframes popup-open {
+  from { transform: translateY(12px) scale(.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.login-popup-overlay.show .login-popup-content,
+.login-popup-content.show {
+  animation: popup-open 240ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Role/tab switch animation */
+.role-panel {
+  transition: opacity 220ms ease, transform 220ms ease;
+  will-change: opacity, transform;
+}
+.role-panel.enter {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.role-panel.enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.role-panel.exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.role-panel.exit-active {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.login-popup-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+}
+
+.form-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.25rem;
+}
+.subtitle {
+  margin: 0 0 1rem 0;
+  color: var(--text-color-light);
+}
+
+.google-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.privacy-text {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  text-align: center;
+}
+
+.error-text {
+  color: #ef4444;
+  text-align: center;
+  margin-top: 0.5rem;
+}

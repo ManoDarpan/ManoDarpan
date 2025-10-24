@@ -1,0 +1,149 @@
+.about-page {
+    padding: 0 2rem 4rem 2rem;
+}
+
+/* Hero Section */
+.about-hero {
+    text-align: center;
+    padding: 6rem 1rem;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    margin: -1px -2rem 4rem -2rem; /* Extend to edges */
+}
+
+.about-hero-content h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.about-hero-content p {
+    font-size: 1.25rem;
+    color: var(--text-color-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* General Section Styling */
+.about-section {
+    max-width: 1200px;
+    margin: 0 auto 5rem auto;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.about-section > p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color-light);
+}
+
+/* Values Section */
+.values-section {
+    margin-bottom: 6rem;
+}
+
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.value-card {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.value-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.value-card p {
+    font-size: 1rem;
+    color: var(--text-color-light);
+    line-height: 1.6;
+}
+
+/* Team Section */
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.team-member-card {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.team-member-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem auto;
+    background-color: var(--bg-start);
+    padding: 0.5rem;
+}
+
+.team-member-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.team-member-card p {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.team-member-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .team-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 4rem 1rem;
+    }
+    .about-hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .team-container {
+        grid-template-columns: 1fr;
+    }
+}

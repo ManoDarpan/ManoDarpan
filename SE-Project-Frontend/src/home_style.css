@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&family=Playwrite+PL:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aladin&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Funnel+Display:wght@300..800&family=Quicksand:wght@300..700&display=swap');
+
+
+/* ========================================
+   CSS RESET & GLOBAL STYLES
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Playwrite PL', 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif; */
+}
+
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #f5ede7;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   TYPOGRAPHY
+======================================== */
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.design_text {
+    font-family: 'Playwrite PL', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: xx-large !important;
+    font-weight: 800 !important;
+}
+
+.regular_text {
+    /* font-family: 'Funnel Display','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    color: var(--text-color);
+    font-family: var(--font-calm);
+    font-weight: 600;
+}
+
+.heading-text{
+    font-family:'Funnel Display','Segoe UI', Tahoma, 'Geneva', 'Verdana', sans-serif;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+/* Typing Cursor Animation */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #c61919;
+    font-weight: normal;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Star Rotation Animation */
+@keyframes roll {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(72deg); }
+    40% { transform: rotate(144deg); }
+    60% { transform: rotate(216deg); }
+    80% { transform: rotate(288deg); }
+    100% { transform: rotate(360deg); }
+}
+
