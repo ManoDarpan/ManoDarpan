@@ -192,7 +192,3 @@
   -webkit-appearance: none;
   margin: 0;
 }
-
-.info-item input[type="number"] {
-  -moz-appearance: textfield;
-}
