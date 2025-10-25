@@ -2,9 +2,9 @@
   "name": "Manodarpan",
   "short_name": "Manodarpan",
   "id": "/?source=pwa",
-  "start_url": "/",
+  "start_url": "\"start_url\"=\"https://manodarpan.netlify.app\"",
   "scope": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#1976D2",
@@ -19,5 +19,8 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "description": "A mirror to your mind, a friend for your journey. \n\nManoDarpan is a compassionate space designed to help you understand, track, and improve your mental well-being.",
+  "dir": "auto",
+  "lang": "en"
 }
