@@ -41,4 +41,3 @@ APIs were tested manually using Postman. Tests covered authentication flows, CRU
 ## Notes / Next steps
 - Provide any additional logo image links or preferred sizes if you want changes.  
 - Provide Postman collection (export) to include a direct link.
-- Provide Postman collection (export) to include a direct link.
