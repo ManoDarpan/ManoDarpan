@@ -100,12 +100,18 @@ body { font-size: 16px; line-height: 1.45 }
 }
 
 /* Make buttons and controls easier to tap on touch devices */
-button, .chat-send-btn, .end-chat-btn, .accept-btn, .save-btn {
+button, .chat-send-btn, .end-chat-btn, .accept-btn{
   min-height: 40px;
   padding: 0.5rem 0.75rem;
   background: transparent;
   border: none;
   
+}
+
+.save-btn {
+  min-height: 40px;
+  padding: 0.5rem 0.75rem;
+  border: none;
 }
 
 /* Sidebar stacking for mobile: use a single column with header + main stacked */
