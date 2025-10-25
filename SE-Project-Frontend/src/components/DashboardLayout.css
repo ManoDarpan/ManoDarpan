@@ -1,17 +1,15 @@
-
-
 .navbar-top{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; /* Positions items at opposite ends */
     align-items: center;
     padding: 1rem 2rem;
     position: relative;
-    z-index: 100;
+    z-index: 100; /* Ensures navbar is on top */
 }
 
 .profile-menu {
-    position: relative;
+    position: relative; /* Container for absolute dropdown */
     z-index: 101;
     display: flex;
     align-items: center;
@@ -21,7 +19,7 @@
 .profile-button {
     width: auto;
     height: 48px;
-    border-radius: 24px;
+    border-radius: 24px; /* Creates a pill shape */
     background-color: var(--bg-start);
     border: 2px solid var(--surface-color);
     cursor: pointer;
@@ -31,7 +29,7 @@
     gap: 0.5rem;
     padding: 0 1rem;
     box-shadow: 0 1px 3px 0 var(--shadow-color);
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
     font-family: var(--font-calm);
     /* font-weight: 700; */
 }
@@ -46,34 +44,34 @@
 }
 
 .dashboard-content {
-  flex-grow: 1;
-  padding: 2rem;
-  background-color: var(--bg-end);
-  border-radius: 2rem;
+    flex-grow: 1; /* Allows content to fill space */
+    padding: 2rem;
+    background-color: var(--bg-end);
+    border-radius: 2rem;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 74px;
-    right: 0;
+    position: absolute; /* Positions relative to .profile-menu */
+    top: 74px; /* Position below the button */
+    right: 0; /* Aligns to the right edge */
     margin-top: 0.5rem;
     width: 200px;
     background-color: var(--surface-color);
     border-radius: 1.5rem;
     box-shadow: 0 10px 15px -3px var(--shadow-color);
     border: 1px solid var(--border-color);
-    opacity: 0;
+    opacity: 0; /* Hidden by default */
     transform: translateY(-10px);
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-    pointer-events: none;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out; /* Animation for showing */
+    pointer-events: none; /* Prevents interaction when hidden */
     overflow: hidden;
     z-index: 50;
 }
 
 .dropdown-menu.open {
-    opacity: 1;
+    opacity: 1; /* Makes it visible */
     transform: translateY(0);
-    pointer-events: auto;
+    pointer-events: auto; /* Allows interaction */
 }
 
 .dropdown-item {
@@ -97,7 +95,7 @@
 }
 
 .logout-button {
-    color: #e53e3e;
+    color: #e53e3e; /* Distinct color for log out */
 }
 
 .logout-button:hover {
@@ -106,12 +104,12 @@
 }
 
 .dropdown-item:hover {
-    background-color: rgba(128, 128, 128, 0.1);
+    background-color: rgba(128, 128, 128, 0.1); /* Subtle hover background */
 }
 
 .dropdown-divider {
     height: 1px;
-    background-color: var(--border-color);
+    background-color: var(--border-color); /* Horizontal separator */
     margin: 0.5rem 0;
 }
 
@@ -123,7 +121,7 @@
     align-items: center;
     justify-content:center;
     gap: 0.5rem;
-    transition: background-color ease-in-out 0.1s , transform ease-in-out 0.1s;
+    transition: background-color ease-in-out 0.1s , transform ease-in-out 0.1s; /* Smooth transitions */
     border-radius: 10px;
     font-family: var(--font-calm);
     font-weight: 900;
@@ -133,7 +131,7 @@
 
 .nav-side-buttons:hover, .nav-side-buttons.active {
     background-color: var(--sidebar-hover-bg);
-    transform: scale(1.1);
+    transform: scale(1.1); /* Zoom effect on hover/active */
     border-radius: 10px;
 }
 
@@ -142,17 +140,17 @@
     width: 25px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) { /* Styles for mobile/small screens */
     .dashboard-content {
         padding: 0;
         margin: 0;
-        border-radius: 0;
+        border-radius: 0; /* Full screen on small viewports */
     }
     .navbar-top {
         padding: 1rem;
     }
     .theme-toggle-button {
-        display: none;
+        display: none; /* Hides the theme button */
     }
 }
 
