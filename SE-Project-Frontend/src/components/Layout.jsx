@@ -3,7 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './Navbar';
 import DashboardTopNavbar from './DashboardTopNavbar';
-import DashboardSidebar from './DashboardSidebar';
 import AnimatedPage from './AnimatedPage';
 import LoginPopup from './LoginPopup';
 import Portal from './Portal';

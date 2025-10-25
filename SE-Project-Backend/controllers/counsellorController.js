@@ -2,14 +2,24 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto';
 import Counsellor from "../models/counsellorModel.js";
+import { getOnlineCounsellors } from '../utils/socketManager.js';
 import { OAuth2Client } from 'google-auth-library';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const getCounsellors = async (req, res) => {
     try {
-        const counsellors = await Counsellor.find({}, 'name username areaOfExpertise').limit(10);
-        res.status(200).json({ counsellors });
+    const counsellors = await Counsellor.find({}, 'name username areaOfExpertise').limit(10);
+    // annotate with online status when available
+    const onlineSet = getOnlineCounsellors();
+    const annotated = counsellors.map(c => ({
+      _id: c._id,
+      name: c.name,
+      username: c.username,
+      areaOfExpertise: c.areaOfExpertise,
+      isOnline: onlineSet.has(String(c._id))
+    }));
+    res.status(200).json({ counsellors: annotated });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching counsellors', error: error.message });
     }

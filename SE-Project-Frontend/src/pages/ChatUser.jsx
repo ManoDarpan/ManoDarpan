@@ -58,14 +58,38 @@ export default function ChatUser() {
   const [userProfile, setUserProfile] = useState({});
   const [partnerProfile, setPartnerProfile] = useState(null);
 
+  // Load stored conversation on mount
+  useEffect(() => {
+    const storedConvId = localStorage.getItem('activeConversationId');
+    const storedConvCounsellorName = localStorage.getItem('activeConversationCounsellorName');
+    if (storedConvId) {
+      setConversationId(storedConvId);
+      setPartnerName(storedConvCounsellorName || 'Counsellor');
+      setIsActive(true);
+    }
+  }, []);
+
+  // Save conversation to localStorage when it changes
+  useEffect(() => {
+    if (conversationId) {
+      localStorage.setItem('activeConversationId', conversationId);
+      localStorage.setItem('activeConversationCounsellorName', partnerName);
+    } else {
+      localStorage.removeItem('activeConversationId');
+      localStorage.removeItem('activeConversationCounsellorName');
+    }
+  }, [conversationId, partnerName]);
+
   useEffect(() => {
     setError('');
     const token = localStorage.getItem('token');
-    const urlConv = new URLSearchParams(location.search).get('conversationId');
-    const urlTab = new URLSearchParams(location.search).get('tab');
-    const storedConv = localStorage.getItem('conversationId');
-    setStoredConversationId(storedConv);
-    const convId = urlConv || null;
+  const urlConv = new URLSearchParams(location.search).get('conversationId');
+  const urlTab = new URLSearchParams(location.search).get('tab');
+  const storedConv = localStorage.getItem('activeConversationId');
+  // keep track of stored conversation id for UI (do not overwrite stored value with url param)
+  setStoredConversationId(storedConv);
+  // prefer explicit url param, then any stored active conversation
+  const convId = urlConv || storedConv || null;
 
     if (!token) {
       setError('No auth token found. Please login first.');
@@ -98,6 +122,18 @@ export default function ChatUser() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
+    // Socket event handlers for counsellor status updates
+    if (socket) {
+      socket.on('counsellorStatusChanged', ({ counsellorId, status }) => {
+        setCounsellors(prev => prev.map(c => {
+          if (c._id === counsellorId) {
+            return { ...c, isOnline: status === 'online' };
+          }
+          return c;
+        }));
+      });
+    }
+
     const fetchLists = async () => {
       try {
         const [cRes, convRes] = await Promise.all([
@@ -126,7 +162,7 @@ export default function ChatUser() {
       if (data && data.conversationId) {
         toast.success('Counsellor accepted your request!');
         setConversationId(data.conversationId);
-        localStorage.setItem('conversationId', data.conversationId);
+  localStorage.setItem('activeConversationId', data.conversationId);
         // optimistically allow sending until server metadata confirms
         setIsActive(true);
         if (data.counsellor) {
@@ -149,6 +185,9 @@ export default function ChatUser() {
     });
     s.on('conversationEnded', (data) => {
       console.debug('[socket] conversationEnded received (user):', { data, currentConversationId: conversationId, partnerName, socketId: s.id });
+      // Clear stored conversation data
+      localStorage.removeItem('activeConversationId');
+      localStorage.removeItem('activeConversationCounsellorName');
       if (data && data.conversationId) {
         const endedConv = String(data.conversationId);
         const mapped = convToCounsellorRef.current[endedConv];
@@ -171,7 +210,7 @@ export default function ChatUser() {
         const current = convIdRef.current ? String(convIdRef.current) : null;
         if (current && current === endedConv) {
           setIsActive(false);
-          localStorage.removeItem('conversationId');
+          localStorage.removeItem('activeConversationId');
           try { const whoName = data.endedByName || (data.endedBy === 'counsellor' ? 'Counsellor' : 'User'); toast(`${whoName} ended the conversation`); } catch(e) { }
           setConversationId(null);
         }
@@ -226,7 +265,7 @@ export default function ChatUser() {
             setMessages(msgs || []);
           }
         } else {
-          localStorage.removeItem('conversationId');
+          localStorage.removeItem('activeConversationId');
           setConversationId(null);
         }
       })();
@@ -252,7 +291,7 @@ export default function ChatUser() {
           if (conv) {
             clearInterval(iv);
             setConversationId(conv._id);
-            localStorage.setItem('conversationId', conv._id);
+            localStorage.setItem('activeConversationId', conv._id);
           }
         }
       } catch (err) { console.warn('poll error', err) }
@@ -346,7 +385,7 @@ export default function ChatUser() {
       if (res.ok) {
         setIsActive(false);
         try { if (socket) socket.emit('leaveConversation', { conversationId }); } catch (e) { }
-        localStorage.removeItem('conversationId');
+  localStorage.removeItem('activeConversationId');
         setConversationId(null);
       }
     } catch (e) { console.warn('end chat failed', e) }
@@ -388,7 +427,10 @@ export default function ChatUser() {
                   </label>
                 </div>
                 <div className="conversations-list counsellors-list">
-                  {counsellors.filter(c => (c.name || c.username || '').toLowerCase().includes(searchQuery.toLowerCase())).map((c) => (
+                  {counsellors
+                    .filter(c => (c.isOnline === undefined || c.isOnline) ) // show only online (or unspecified) counsellors
+                    .filter(c => (c.name || c.username || '').toLowerCase().includes(searchQuery.toLowerCase()))
+                    .map((c) => (
                     <div key={c._id || c.id} className={`conv-item ${activeStored && convToCounsellorRef.current && convToCounsellorRef.current[activeStored] === c._id ? 'active-stored' : ''}`}>
                       <img className="item-avatar" src={c.avatar || '/assets/male.svg'} alt="counsellor avatar" />
                       <div className="item-body">
@@ -419,7 +461,7 @@ export default function ChatUser() {
               <div id="conversations-list" style={{marginTop:'8px'}}>
                 <div className="conversations-list">
                   {conversations.filter(cv => (cv.counsellor?.name || cv.counsellor?.username || '').toLowerCase().includes(searchQuery.toLowerCase())).map((cv) => (
-                    <div key={cv._id} className={`conv-item ${cv.isActive ? 'active-conv' : ''}`} onClick={() => { setConversationId(cv._id); localStorage.setItem('conversationId', cv._id); setSideOpen(false); }}>
+                    <div key={cv._id} className={`conv-item ${cv.isActive ? 'active-conv' : ''}`} onClick={() => { setConversationId(cv._id); localStorage.setItem('activeConversationId', cv._id); setSideOpen(false); }}>
                       <img className="item-avatar" src={cv.counsellor?.avatar || '/assets/male.svg'} alt="counsellor avatar" />
                       <div className="item-body">
                         <div className="item-title">{cv.counsellor?.name || cv.counsellor?.username || 'Counsellor'}</div>

@@ -38,7 +38,7 @@ export default function ChatWindow({
               <img src={(partnerProfile && partnerProfile.profilePic) || (userProfile && userProfile.profilePic) || '/assets/male.svg'} alt="avatar" className="chat-avatar" />
               <div>
                 {/* Prefer partnerName (remote participant), then partnerProfile name, then profile name */}
-                <div className="chat-top-name">{partnerName || (partnerProfile && (partnerProfile.name || partnerProfile.username)) || (userProfile && (userProfile.name || userProfile.fullName)) || (userProfile && userProfile.email ? String(userProfile.email).split('@')[0] : '')}</div>
+                <div className="chat-top-name">{partnerName || (partnerProfile && (partnerProfile.name || partnerProfile.username)) || (userProfile && (userProfile.name || userProfile.fullName)) || 'User'}</div>
                 <div className="chat-top-sub">{isActive ? 'Connected' : 'Inactive'}</div>
               </div>
             </div>

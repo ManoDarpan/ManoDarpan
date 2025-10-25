@@ -44,7 +44,7 @@ export const getUserRequests = async (req, res) => {
 
 export const getPendingRequests = async (req, res) => {
     try {
-        const requests = await Request.find({ counsellor: req.counsellor._id, status: "pending", expiresAt: { $gt: new Date() } }).populate("user", "username email");
+        const requests = await Request.find({ counsellor: req.counsellor._id, status: "pending", expiresAt: { $gt: new Date() } }).populate("user", "name username email");
         const payload = requests.map(r => {
             const base = {
                 _id: r._id,
@@ -56,7 +56,7 @@ export const getPendingRequests = async (req, res) => {
             if (r.anonymous) {
                 base.user = { username: 'Anonymous', email: null };
             } else if (r.user) {
-                base.user = { username: r.user.username, email: r.user.email };
+                base.user = { name: r.user.name, username: r.user.username, email: r.user.email };
             } else {
                 base.user = null;
             }

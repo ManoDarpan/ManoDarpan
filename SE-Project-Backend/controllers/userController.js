@@ -185,19 +185,19 @@ export const getLibrary = async (req, res) => {
                 id: '6',
                 title: "Beginner's Guide to Yoga",
                 imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800',
-                resourceUrl: 'https://www.yogajournal.com/practice/beginners/beginners-guide-to-yoga/'
+                resourceUrl: 'https://isha.sadhguru.org/yoga/yoga-for-beginners/'
             },
             {
                 id: '7',
                 title: 'Dealing with Grief',
-                imageUrl: 'https://images.unsplash.com/photo-1582114803437-a8fef1de0f74?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGVhbGluZyUyMHdpdGglMjBncmllZnxlbnwwfHwwfHx8Mg%3D%3D&auto=format&fit=crop&q=60&w=600',
+                imageUrl: 'https://images.unsplash.com/photo-1626783658527-d7355850e35d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=60&w=600',
                 resourceUrl: 'https://www.helpguide.org/articles/grief/coping-with-grief-and-loss.htm'
             },
             {
                 id: '8',
                 title: 'Building Self-Esteem',
                 imageUrl: 'https://images.unsplash.com/photo-1703783413562-d2577d9c4e82?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YnVpbGRpbmclMjBzZWxmJTIwZXN0ZWVtfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=600',
-                resourceUrl: 'https://www.verywellmind.com/how-to-build-self-esteem-4175755'
+                resourceUrl: 'https://www.mind.org.uk/information-support/types-of-mental-health-problems/self-esteem/tips-to-improve-your-self-esteem/'
             },
             {
                 id: '9',
@@ -209,7 +209,7 @@ export const getLibrary = async (req, res) => {
                 id: '10',
                 title: 'Digital Detox Guide',
                 imageUrl: 'https://images.unsplash.com/photo-1695462131582-77b777ea8ce8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlnaXRhbCUyMGRldG94JTIwZ3VpZGV8ZW58MHx8MHx8fDI%3D&auto=format&fit=crop&q=60&w=600',
-                resourceUrl: 'https://www.verywellmind.com/what-is-a-digital-detox-4582813'
+                resourceUrl: 'https://www.everydayhealth.com/emotional-health/how-to-do-a-digital-detox-without-unplugging-completely/'
             },
             {
                 id: '11',
