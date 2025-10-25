@@ -7,6 +7,16 @@
 ## Overview
 Manodarpan Backend provides RESTful APIs for authentication, data persistence, sentiment analysis triggers, counsellor interactions and administrative operations.
 
+## Getting Started
+```powershell
+git clone <repo-url>
+cd SE-Project-Backend
+npm install
+npm start
+```
+> [!NOTE]
+> For the application to run correctly, you'll need to create a `.env` file in the root of the `SE-Project-Backend` directory. This file should contain the necessary environment variables, such as database connection strings and JWT secrets.
+
 ## Tech Stack
 
 - <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTglV8OKEUEbqJYaxunvJQJdhYKZHJ50X_67A&s" alt="MongoDB" width="36" style="vertical-align:middle; margin-right:8px"/> MongoDB (Mongoose)

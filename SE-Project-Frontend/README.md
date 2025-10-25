@@ -5,7 +5,7 @@
 </div>
 
 <p align="center">
-  <img src="https://i.ibb.co/Z1WyHPBq/Screenshot-2025-10-25-171246.png" alt="Manodarpan Dashboard" width="800" style="border-radius: 8px; margin: 20px 0;"/>
+  <img src="https://lh3.googleusercontent.com/d/189fOsy1mkthU6cdrCc6rMnThPkRlo7pj" alt="Manodarpan Dashboard" width="800" style="border-radius: 8px; margin: 20px 0;"/>
 </p>
 
 ## 📋 Overview
@@ -54,8 +54,10 @@ cd SE-Project-Frontend
 npm install
 npm run dev
 ```
+> [!NOTE]
+> For features like sign-in to work correctly, you'll need to create a `.env` file in the root of the `SE-Project-Frontend` directory. This file should contain the necessary environment variables.
 
-Visit [http://localhost:5173](http://localhost:5173) to view the application.
+Visit [http://localhost:5173] to view the application.
 
 ## 📜 Available Scripts
 - `npm run dev` - Start development server
