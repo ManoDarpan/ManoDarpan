@@ -36,6 +36,46 @@ export default function ChatCounsellor() {
   const [searchQuery, setSearchQuery] = useState('');
   const [userProfile, setUserProfile] = useState({});
 
+  // Load stored conversation on mount
+  useEffect(() => {
+    const storedConvId = localStorage.getItem('activeConversationId');
+    const storedConvUserName = localStorage.getItem('activeConversationUserName');
+    if (storedConvId) {
+      setConversationId(storedConvId);
+      setPartnerName(storedConvUserName || 'User');
+      setIsActive(true);
+    }
+  }, []);
+
+  // Save conversation to localStorage when it changes
+  useEffect(() => {
+    if (conversationId) {
+      localStorage.setItem('activeConversationId', conversationId);
+      localStorage.setItem('activeConversationUserName', partnerName);
+    } else {
+      localStorage.removeItem('activeConversationId');
+      localStorage.removeItem('activeConversationUserName');
+    }
+  }, [conversationId, partnerName]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    // Get counsellor ID from the token
+    const counsellorId = JSON.parse(atob(token.split('.')[1])).id;
+
+    // Emit counsellor online status
+    if (socket) {
+      socket.emit('counsellorOnline', counsellorId);
+      
+      // Cleanup function to emit offline status
+      return () => {
+        socket.emit('counsellorOffline', counsellorId);
+      };
+    }
+  }, [socket]);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -71,12 +111,12 @@ export default function ChatCounsellor() {
     }
 
     // capture stored conv id but do not auto-open it; only open if url provides conversationId
-    const urlConv = new URLSearchParams(location.search).get('conversationId');
-    const storedConv = localStorage.getItem('conversationId');
+  const urlConv = new URLSearchParams(location.search).get('conversationId');
+  const storedConv = localStorage.getItem('activeConversationId');
     setStoredConversationId(storedConv);
     if (urlConv) {
       setConversationId(urlConv);
-      localStorage.setItem('conversationId', urlConv);
+  localStorage.setItem('activeConversationId', urlConv);
     }
 
   const s = io(API_URL, { auth: { token } });
@@ -99,7 +139,7 @@ export default function ChatCounsellor() {
     s.on('requestAccepted', (payload) => {
       if (payload && payload.conversationId) {
         setConversationId(payload.conversationId);
-        localStorage.setItem('conversationId', payload.conversationId);
+  localStorage.setItem('activeConversationId', payload.conversationId);
         setPendingRequests(prev => prev.filter(r => r._id !== payload.requestId));
       }
     });
@@ -129,14 +169,14 @@ export default function ChatCounsellor() {
           const endedStr = endedConv ? String(endedConv) : null;
           if (current && endedStr && current === endedStr) {
             setIsActive(false);
-            localStorage.removeItem('conversationId');
+            localStorage.removeItem('activeConversationId');
             try { const whoName = payload.endedByName || (payload.endedBy === 'counsellor' ? 'Counsellor' : 'User'); toast(`${whoName} ended the conversation`); } catch (e) { }
             setConversationId(null);
           } else {
             const endedName = payload && payload.endedByName ? String(payload.endedByName).trim() : null;
             if (endedName && partnerName && String(partnerName).trim() === endedName) {
               setIsActive(false);
-              localStorage.removeItem('conversationId');
+              localStorage.removeItem('activeConversationId');
               try { toast(`${endedName} ended the conversation`); } catch (e) { }
               setConversationId(null);
             }
@@ -201,7 +241,7 @@ export default function ChatCounsellor() {
             }
             // set partner name from conversation metadata (prefer name over username/email)
             if (conversation) {
-              const uname = conversation.user && (conversation.user.name || conversation.user.username || conversation.user.email);
+              const uname = conversation.user && (conversation.user.name || conversation.user.username || 'User');
               setPartnerName(conversation.isAnonymous ? 'Anonymous' : (uname || 'User'));
               setUserProfile(conversation.counsellor);
               // if conversation maps to a request id or user id, mark corresponding pending request as active
@@ -310,7 +350,7 @@ export default function ChatCounsellor() {
       if (res.ok) {
         setIsActive(false);
         try { if (socket) socket.emit('leaveConversation', { conversationId }); } catch (e) { }
-        localStorage.removeItem('conversationId');
+  localStorage.removeItem('activeConversationId');
         setConversationId(null);
       }
     } catch (e) { console.warn('end chat failed', e) }
@@ -358,7 +398,7 @@ export default function ChatCounsellor() {
                           const convId = data.conversationId;
                           setConversationId(convId);
                           setPartnerName(r.anonymous ? 'Anonymous' : (r.user && (r.user.name || r.user.username)) || 'User');
-                          localStorage.setItem('conversationId', convId);
+                          localStorage.setItem('activeConversationId', convId);
                           // remove from pending list
                           setPendingRequests((prev) => prev.filter(x => x._id !== r._id));
                         } else {

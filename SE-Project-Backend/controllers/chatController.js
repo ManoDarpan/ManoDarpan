@@ -118,7 +118,7 @@ export const getUserConversations = async (req, res) => {
 export const getConversationById = async (req, res) => {
 	try {
 		const { id } = req.params;
-		const conv = await Conversation.findById(id).populate('counsellor', 'name username profilePic').populate('user', 'username profilePic');
+		const conv = await Conversation.findById(id).populate('counsellor', 'name username profilePic').populate('user', 'name username profilePic');
 		if (!conv) return res.status(404).json({ message: 'Conversation not found' });
 		const actorId = req.user ? req.user._id : (req.counsellor ? req.counsellor._id : null);
 		if (!actorId) {
