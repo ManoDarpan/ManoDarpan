@@ -1,4 +1,5 @@
-<h1 align="center" style="color: #6A1B9A">𝓜𝓪𝓷𝓸𝓭𝓪𝓻𝓹𝓪𝓷</h1>
+<link href="https://fonts.googleapis.com/css2?family=Aladin&display=swap" rel="stylesheet">
+<h1 align="center" style="font-family: 'Aladin', cursive; color: #ffffffff; font-size: 5rem;">Manodarpan</h1>
 
 <p align="center">
   <img src="https://manodarpan.netlify.app/assets/logo.png" alt="Manodarpan Logo" width="200"/>
