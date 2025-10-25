@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { FiSend, FiLogOut } from 'react-icons/fi';
 import ConfirmPopup from './ConfirmPopup';
 
+// Chat window UI
 export default function ChatWindow({
   partnerName,
   isActive,
@@ -23,6 +24,7 @@ export default function ChatWindow({
   ,
   partnerProfile = null
 }) {
+  // Scroll to latest message
   useEffect(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -70,7 +72,7 @@ export default function ChatWindow({
                   );
                 })}
               </div>
-
+              {/* Input */}
               <div className="chat-actions-row">
                 <div className="chat-input-row">
                   <textarea
@@ -90,6 +92,7 @@ export default function ChatWindow({
             </div>
         </>
       ) : (
+      // Placeholder when no chat is selected
         <div className="chat-placeholder">
           <div className="chat-placeholder-card">
             {isCounsellor ? 'Accept an incoming request from the list to start chatting.' : 'Select a counsellor from the list to start chatting.'}
