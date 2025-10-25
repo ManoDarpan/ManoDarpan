@@ -38,3 +38,7 @@ APIs were tested manually using Postman. Tests covered authentication flows, CRU
 - middlewares/ — auth checks, validation, error handlers, rate limiting  
 - utils/ — email, notifications, cron jobs, schedulers
 
+## Contributors
+- Akshat Jaipuriar — Backend Development
+- Ayush Rewanshete — Backend Assistance
+
