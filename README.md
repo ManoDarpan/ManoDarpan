@@ -71,3 +71,9 @@ We are a team of four engineering students passionate about creating meaningful 
 
 #### Our Vision
 We strive to restore mental peace by providing a safe, anonymous platform that acts as a companion during difficult times. Manodarpan is built on the foundation of non-judgmental support, ensuring every user feels heard, understood, and supported on their journey to better mental health.
+
+## Team Members
+- Akshat Jaipuriar - Backend Developer
+- Yashdeep - Frontend Developer
+- Srushty Narayankar - UI/UX Designer
+- Ayush Rewanshete - Documentation and Backend Assistance
