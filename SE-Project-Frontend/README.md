@@ -9,15 +9,15 @@ Frontend for Manodarpan — a modern React application built with Vite that prov
 
 ## 🛠️ Tech Stack
 
-- <img src="https://raw.githubusercontent.com/reactjs/reactjs.org/main/src/icons/logo.svg" alt="React" width="36" style="vertical-align:middle; margin-right:8px"/> React
+- <img src="https://images.icon-icons.com/2415/PNG/512/react_original_wordmark_logo_icon_146375.png" alt="React" width="36" style="vertical-align:middle; margin-right:8px"/> React
 
 - <img src="https://vitejs.dev/logo.svg" alt="Vite" width="36" style="vertical-align:middle; margin-right:8px"/> Vite
 
-- <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" alt="Styled Components" width="36" style="vertical-align:middle; margin-right:8px"/> Styled Components
+- <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" alt="Styled Components" width="36" style="vertical-align:middle; margin-right:8px"/> Styled Components - A CSS-in-JS library that allows writing actual CSS code to style React components, enabling dynamic styling based on props and maintaining component-scoped styles
 
 - <img src="https://raw.githubusercontent.com/reduxjs/redux/master/logo/logo.png" alt="Redux" width="36" style="vertical-align:middle; margin-right:8px"/> Redux
 
-- <img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.79614a5f61617ba49a0891494521226b.svg" alt="Tailwind CSS" width="36" style="vertical-align:middle; margin-right:8px"/> Tailwind CSS
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2560px-Tailwind_CSS_Logo.svg.png" alt="Tailwind CSS" width="36" style="vertical-align:middle; margin-right:8px"/> Tailwind CSS
 
 ## ✨ Key Features
 
@@ -56,3 +56,7 @@ Visit [http://localhost:5173](http://localhost:5173) to view the application.
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm test` - Run test suite
+
+## 👥 Contributors
+- Yashdeep - Frontend Developer
+- Srushty Narayankar - UI/UX Designer
