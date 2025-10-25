@@ -8,15 +8,20 @@
 Manodarpan Backend provides RESTful APIs for authentication, data persistence, sentiment analysis triggers, counsellor interactions and administrative operations.
 
 ## Tech Stack
-<p>
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTglV8OKEUEbqJYaxunvJQJdhYKZHJ50X_67A&s" alt="MongoDB" width="48" style="vertical-align:middle; margin-right:8px"/> MongoDB (Mongoose)  
-  <img src="https://www.vhv.rs/dpng/d/546-5460201_node-js-logo-png-transparent-png.png" alt="Node.js" width="48" style="vertical-align:middle; margin:0 8px"/> Node.js + Express  
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" alt="Express" width="48" style="vertical-align:middle; margin:0 8px"/> Express  
-  <img src="https://cdn.worldvectorlogo.com/logos/jwt-3.svg" alt="JWT" width="48" style="vertical-align:middle; margin:0 8px"/> JSON Web Tokens (JWT)  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJj5k4jEbCPsdaAt2utZ7kzwSuAwC4NOMDKGK1OuKUzeaXFddduuVQnMFQLQYZ2sbd4yE&usqp=CAU" alt="bcrypt" width="48" style="vertical-align:middle; margin:0 8px"/> bcrypt  
-  <img src="https://raw.githubusercontent.com/cdimascio/dotenv-kotlin/master/assets/kotlin-dotenv-logo.png" alt="dotenv" width="48" style="vertical-align:middle; margin:0 8px"/> dotenv  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoZAPhkIP75IVa4trptoEfFlzk-0KFEm0ibg&s" alt="Postman" width="48" style="vertical-align:middle; margin:0 8px"/> Postman (API testing)
-</p>
+
+- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTglV8OKEUEbqJYaxunvJQJdhYKZHJ50X_67A&s" alt="MongoDB" width="36" style="vertical-align:middle; margin-right:8px"/> MongoDB (Mongoose)
+
+- <img src="https://www.vhv.rs/dpng/d/546-5460201_node-js-logo-png-transparent-png.png" alt="Node.js" width="36" style="vertical-align:middle; margin-right:8px"/> Node.js
+
+- <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" alt="Express" width="36" style="vertical-align:middle; margin-right:8px"/> Express
+
+- <img src="https://cdn.worldvectorlogo.com/logos/jwt-3.svg" alt="JWT" width="36" style="vertical-align:middle; margin-right:8px"/> JSON Web Tokens (JWT)
+
+- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJj5k4jEbCPsdaAt2utZ7kzwSuAwC4NOMDKGK1OuKUzeaXFddduuVQnMFQLQYZ2sbd4yE&usqp=CAU" alt="bcrypt" width="36" style="vertical-align:middle; margin-right:8px"/> bcrypt
+
+- <img src="https://raw.githubusercontent.com/cdimascio/dotenv-kotlin/master/assets/kotlin-dotenv-logo.png" alt="dotenv" width="36" style="vertical-align:middle; margin-right:8px"/> dotenv
+
+- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoZAPhkIP75IVa4trptoEfFlzk-0KFEm0ibg&s" alt="Postman" width="36" style="vertical-align:middle; margin-right:8px"/> Postman (API testing)
 
 ## Testing
 APIs were tested manually using Postman. Tests covered authentication flows, CRUD for users/moods/journals, counsellor booking flows and admin routes. Postman collection is available on request.
