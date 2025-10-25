@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Aladin&display=swap" rel="stylesheet">
-<h1 align="center" style="font-family: 'Aladin', cursive; color: #6A1B9A; font-size: 5rem;">Manodarpan</h1>
+<h1 align="center" style="font-family: 'Aladin', cursive; color: #6A1B9A; font-size: 15;">Manodarpan</h1>
 
 <p align="center">
   <img src="https://manodarpan.netlify.app/assets/logo.png" alt="Manodarpan Logo" width="200"/>
