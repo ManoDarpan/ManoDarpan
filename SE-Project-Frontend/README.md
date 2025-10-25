@@ -4,6 +4,10 @@
   <a href="https://manodarpan.netlify.app/" style="color:#8E24AA; text-decoration:none; font-weight:600">Visit Manodarpan • https://manodarpan.netlify.app/</a>
 </div>
 
+<p align="center">
+  <img src="YOUR_DIRECT_IMAGE_LINK" alt="Manodarpan Dashboard" width="800" style="border-radius: 8px; margin: 20px 0;"/>
+</p>
+
 ## 📋 Overview
 Frontend for Manodarpan — a modern React application built with Vite that provides an intuitive interface for mental health tracking and support. Our frontend implements a responsive design pattern with focus on accessibility and user experience. The application features real-time mood tracking, secure journaling, counsellor interaction interfaces, and comprehensive mental health resources, all wrapped in an aesthetically pleasing and user-friendly design.
 
@@ -13,11 +17,13 @@ Frontend for Manodarpan — a modern React application built with Vite that prov
 
 - <img src="https://vitejs.dev/logo.svg" alt="Vite" width="36" style="vertical-align:middle; margin-right:8px"/> Vite
 
-- <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" alt="Styled Components" width="36" style="vertical-align:middle; margin-right:8px"/> Styled Components
+- <img src="https://blog.kakaocdn.net/dna/FISsJ/btquotFH0Kb/AAAAAAAAAAAAAAAAAAAAAMbSSx--YREm5gFOUKcd5JLLkyAYBWIBpBFNGCDf9okB/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=LfBXDZZdUPlrEpbX5TBuuwxE2K4%3D" alt="Recharts" width="36" style="vertical-align:middle; margin-right:8px"/> Recharts
 
-- <img src="https://raw.githubusercontent.com/reduxjs/redux/master/logo/logo.png" alt="Redux" width="36" style="vertical-align:middle; margin-right:8px"/> Redux
+- <img src="https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fi%2Fke6hqywlnr8b3r896hii.png" alt="React Icons" width="36" style="vertical-align:middle; margin-right:8px"/> React Icons
 
-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2560px-Tailwind_CSS_Logo.svg.png" alt="Tailwind CSS" width="36" style="vertical-align:middle; margin-right:8px"/> Tailwind CSS
+- <img src="https://media2.dev.to/dynamic/image/width=1280,height=720,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fo1pj80y0s0xr7nq527js.jpg" alt="Lottie Files" width="36" style="vertical-align:middle; margin-right:8px"/> Lottie Files
+
+
 
 ## ✨ Key Features
 
