@@ -13,7 +13,7 @@ Frontend for Manodarpan — a modern React application built with Vite that prov
 
 - <img src="https://vitejs.dev/logo.svg" alt="Vite" width="36" style="vertical-align:middle; margin-right:8px"/> Vite
 
-- <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" alt="Styled Components" width="36" style="vertical-align:middle; margin-right:8px"/> Styled Components - A CSS-in-JS library that allows writing actual CSS code to style React components, enabling dynamic styling based on props and maintaining component-scoped styles
+- <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" alt="Styled Components" width="36" style="vertical-align:middle; margin-right:8px"/> Styled Components
 
 - <img src="https://raw.githubusercontent.com/reduxjs/redux/master/logo/logo.png" alt="Redux" width="36" style="vertical-align:middle; margin-right:8px"/> Redux
 
