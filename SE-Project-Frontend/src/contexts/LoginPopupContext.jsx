@@ -1,65 +1,64 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
-const LoginPopupContext = createContext();
+const LoginPopupContext = createContext(); // Create the context object
 
-export const useLoginPopup = () => useContext(LoginPopupContext);
+export const useLoginPopup = () => useContext(LoginPopupContext); // Custom hook to consume the context
 
 export const LoginPopupProvider = ({ children }) => {
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(false); // State to control login popup visibility
 
-  const handleLoginClick = () => {
-    setShowLogin(true);
-  };
+  const handleLoginClick = () => {
+    setShowLogin(true); // Function to open the popup
+  };
 
-  const handleCloseLogin = () => {
-    setShowLogin(false);
-  };
+  const handleCloseLogin = () => {
+    setShowLogin(false); // Function to close the popup
+  };
 
-  // Validate existing server token on app load. If a token exists but is invalid/expired,
-  // automatically open the login popup so the user can re-authenticate.
-  useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-    const token = localStorage.getItem('token');
-    if (!token) return; // nothing to validate
+  // Effect to validate an existing token on app load
+  useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'; // Get API base URL
+    const token = localStorage.getItem('token');
+    if (!token) return; // Exit if no token exists
 
-    let cancelled = false;
+    let cancelled = false; // Flag to handle cleanup on unmount
 
-    const validate = async () => {
-      try {
-        // Try user profile first
-        let res = await fetch(`${API_URL}/api/users/profile`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res.ok) {
-          return; // token valid for user
-        }
+    const validate = async () => {
+      try {
+        // 1. Try validating token against user profile endpoint
+        let res = await fetch(`${API_URL}/api/users/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          return; // Token is valid for a user
+        }
 
-        // Try counsellor profile next (in case token belongs to a counsellor)
-        res = await fetch(`${API_URL}/api/counsellors/profile`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res.ok) {
-          return; // token valid for counsellor
-        }
+        // 2. If not a user, try validating token against counsellor profile endpoint
+        res = await fetch(`${API_URL}/api/counsellors/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          return; // Token is valid for a counsellor
+        }
 
-        // token invalid/expired -> prompt login (unless component unmounted)
-        if (!cancelled) setShowLogin(true);
-      } catch (err) {
-        // network error or server offline - don't auto-open login in that case
-        console.warn('Token validation request failed:', err.message || err);
-      }
-    };
+        // Token failed validation for both roles -> auto-open login popup
+        if (!cancelled) setShowLogin(true);
+      } catch (err) {
+        // Log warning for network issues but do not open popup
+        console.warn('Token validation request failed:', err.message || err);
+      }
+    };
 
-    validate();
+    validate();
 
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    return () => {
+      cancelled = true; // Set cleanup flag
+    };
+  }, []); // Runs once on mount
 
-  return (
-    <LoginPopupContext.Provider value={{ showLogin, handleLoginClick, handleCloseLogin }}>
-      {children}
-    </LoginPopupContext.Provider>
-  );
+  return (
+    <LoginPopupContext.Provider value={{ showLogin, handleLoginClick, handleCloseLogin }}>
+      {children} {/* Render children wrapped with the context provider */}
+    </LoginPopupContext.Provider>
+  );
 };
