@@ -119,3 +119,22 @@ button, .chat-send-btn, .end-chat-btn, .accept-btn, .save-btn {
 /* compact utilities */
 .muted { color: var(--text-color-light) }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0 }
+
+/* Aggressive mobile tap/focus reset for SVG and chart libraries (helps remove black tap rectangles) */
+svg, svg *,
+.recharts-wrapper, .recharts-surface, .recharts-layer, .recharts-pie-sector, .recharts-pie {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  touch-action: manipulation !important;
+}
+
+/* Also remove on active/focus states */
+svg *:focus, svg *:active, .recharts-wrapper *:focus, .recharts-wrapper *:active {
+  outline: none !important;
+  box-shadow: none !important;
+}

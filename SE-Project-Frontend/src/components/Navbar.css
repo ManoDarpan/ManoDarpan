@@ -245,7 +245,7 @@
     border: 2px solid var(--surface-color);
     box-shadow: 0 1px 3px 0 var(--shadow-color);
 }
-.profile-avatar-button img { width:28px; height:28px; border-radius:14px }
+.profile-avatar-button img { width:28px; height:28px; border-radius:50% }
 .profile-avatar-button span { font-weight:600; color:var(--text-color); font-size:0.95rem }
 
 .user-dropdown {

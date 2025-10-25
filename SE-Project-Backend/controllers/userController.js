@@ -131,10 +131,12 @@ export const googleAuth = async (req, res) => {
             user = new User({ username: email, email, password: hashed, name, profilePic });
             await user.save();
         } else {
+            // update name if missing
             if ((!user.name || user.name.length === 0) && name) {
                 user.name = name;
             }
-            if ((!user.profilePic || user.profilePic.length === 0) && profilePic) {
+            // always update profilePic from Google when provided so existing users get refreshed images
+            if (profilePic) {
                 user.profilePic = profilePic;
             }
             await user.save();

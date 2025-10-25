@@ -23,7 +23,7 @@ export const createRequest = async (req, res) => {
         const io = getIo();
         if (io && counsellorId) {
             const payload = { _id: newRequest._id, anonymous: !!anonymous, createdAt: newRequest.createdAt };
-            if (!anonymous) payload.user = { _id: req.user._id, name: (req.user && req.user.name) || req.user.username || null };
+            if (!anonymous) payload.user = { _id: req.user._id, name: (req.user && req.user.name) || req.user.username || null, profilePic: (req.user && req.user.profilePic) || null };
             io.to(counsellorId.toString()).emit('newRequest', { request: payload });
         }
     } catch (e) { /* ignore */ }
@@ -44,7 +44,7 @@ export const getUserRequests = async (req, res) => {
 
 export const getPendingRequests = async (req, res) => {
     try {
-        const requests = await Request.find({ counsellor: req.counsellor._id, status: "pending", expiresAt: { $gt: new Date() } }).populate("user", "name username email");
+    const requests = await Request.find({ counsellor: req.counsellor._id, status: "pending", expiresAt: { $gt: new Date() } }).populate("user", "name username email profilePic");
         const payload = requests.map(r => {
             const base = {
                 _id: r._id,
@@ -56,7 +56,7 @@ export const getPendingRequests = async (req, res) => {
             if (r.anonymous) {
                 base.user = { username: 'Anonymous', email: null };
             } else if (r.user) {
-                base.user = { name: r.user.name, username: r.user.username, email: r.user.email };
+                base.user = { name: r.user.name, username: r.user.username, email: r.user.email, profilePic: r.user.profilePic || null };
             } else {
                 base.user = null;
             }

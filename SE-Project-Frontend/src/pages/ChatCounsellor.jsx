@@ -58,23 +58,7 @@ export default function ChatCounsellor() {
     }
   }, [conversationId, partnerName]);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    // Get counsellor ID from the token
-    const counsellorId = JSON.parse(atob(token.split('.')[1])).id;
-
-    // Emit counsellor online status
-    if (socket) {
-      socket.emit('counsellorOnline', counsellorId);
-      
-      // Cleanup function to emit offline status
-      return () => {
-        socket.emit('counsellorOffline', counsellorId);
-      };
-    }
-  }, [socket]);
+  // socket connection is handled elsewhere; server emits counsellorStatus on connect/disconnect
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -120,6 +104,8 @@ export default function ChatCounsellor() {
     }
 
   const s = io(API_URL, { auth: { token } });
+    // expose socket globally so navbar/logout can notify server about counsellor offline
+    try { window.socket = s; } catch (e) { /* ignore */ }
     setSocket(s);
 
     s.on('connect', () => {
@@ -243,7 +229,8 @@ export default function ChatCounsellor() {
             if (conversation) {
               const uname = conversation.user && (conversation.user.name || conversation.user.username || 'User');
               setPartnerName(conversation.isAnonymous ? 'Anonymous' : (uname || 'User'));
-              setUserProfile(conversation.counsellor);
+              // For counsellor view, partner/user profile should be the conversation.user
+              setUserProfile(conversation.user);
               // if conversation maps to a request id or user id, mark corresponding pending request as active
               // server may include originalRequestId in conversation metadata; try that first
               if (conversation.requestId) {

@@ -35,7 +35,10 @@ export default function ChatWindow({
         <>
           <div className="chat-top card">
               <div className="chat-top-left">
-              <img src={(partnerProfile && partnerProfile.profilePic) || (userProfile && userProfile.profilePic) || '/assets/male.svg'} alt="avatar" className="chat-avatar" />
+              <div className="avatar-wrap">
+                <img src={(partnerProfile && partnerProfile.profilePic) || (userProfile && userProfile.profilePic) || '/assets/male.svg'} alt="avatar" className="chat-avatar" />
+                {((partnerProfile && partnerProfile.isOnline) || (userProfile && userProfile.isOnline)) && <span className="online-badge" aria-hidden="true" />}
+              </div>
               <div>
                 {/* Prefer partnerName (remote participant), then partnerProfile name, then profile name */}
                 <div className="chat-top-name">{partnerName || (partnerProfile && (partnerProfile.name || partnerProfile.username)) || (userProfile && (userProfile.name || userProfile.fullName)) || 'User'}</div>

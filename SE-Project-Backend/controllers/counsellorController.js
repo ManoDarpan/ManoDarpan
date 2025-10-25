@@ -9,7 +9,7 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const getCounsellors = async (req, res) => {
     try {
-    const counsellors = await Counsellor.find({}, 'name username areaOfExpertise').limit(10);
+  const counsellors = await Counsellor.find({}, 'name username areaOfExpertise profilePic').limit(10);
     // annotate with online status when available
     const onlineSet = getOnlineCounsellors();
     const annotated = counsellors.map(c => ({
@@ -17,6 +17,7 @@ export const getCounsellors = async (req, res) => {
       name: c.name,
       username: c.username,
       areaOfExpertise: c.areaOfExpertise,
+      profilePic: c.profilePic || null,
       isOnline: onlineSet.has(String(c._id))
     }));
     res.status(200).json({ counsellors: annotated });
@@ -32,17 +33,27 @@ export const googleAuthCounsellor = async (req, res) => {
         const ticket = await googleClient.verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT_ID });
         const payload = ticket.getPayload();
         const email = payload.email;
-        const name = payload.name || payload.email.split('@')[0];
+    const name = payload.name || payload.email.split('@')[0];
+    const profilePic = payload.picture;
 
         let c = await Counsellor.findOne({ email });
-        if (!c) {
-            const rand = crypto.randomBytes(16).toString('hex');
-            const hashed = await bcrypt.hash(rand, 10);
-            c = new Counsellor({ name, username: email, email, password: hashed, areaOfExpertise: 'General', yearsOfExperience: 0 });
-            await c.save();
-        }
+    if (!c) {
+      const rand = crypto.randomBytes(16).toString('hex');
+      const hashed = await bcrypt.hash(rand, 10);
+      c = new Counsellor({ name, username: email, email, password: hashed, areaOfExpertise: 'General', yearsOfExperience: 0, profilePic });
+      await c.save();
+    } else {
+      // update existing counsellor's profilePic from Google if provided
+      if (profilePic) {
+        c.profilePic = profilePic;
+      }
+      if ((!c.name || c.name.length === 0) && name) {
+        c.name = name;
+      }
+      await c.save();
+    }
         const token = jwt.sign({ id: c._id, role: 'counsellor' }, process.env.JWT_SECRET, { expiresIn: '3h' });
-        res.status(200).json({ token, message: 'Authentication successful', counsellor: { id: c._id, name: c.name, username: c.username } });
+    res.status(200).json({ token, message: 'Authentication successful', counsellor: { id: c._id, name: c.name, username: c.username, profilePic: c.profilePic } });
     } catch (err) {
         console.error('googleAuthCounsellor error', err);
         res.status(401).json({ message: 'Invalid Google token', error: err.message });

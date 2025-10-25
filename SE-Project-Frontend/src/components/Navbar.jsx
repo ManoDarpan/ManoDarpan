@@ -62,6 +62,15 @@ export default function Navbar() {
   };
 
   const confirmLogout = () => {
+    try {
+      // If a socket exists, disconnect it so the server will mark counsellor offline via disconnect handler
+      if (window.socket) {
+        try { window.socket.disconnect(); } catch (e) {}
+        try { window.socket = null; } catch (e) {}
+      }
+    } catch (e) {
+      // ignore
+    }
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('counsellor');
@@ -167,7 +176,7 @@ export default function Navbar() {
             {(user || counsellor) && (
               <div ref={userDropdownRef} className="user-dropdown-container">
                 <button onClick={() => setShowUserDropdown(prev => !prev)} className="user-dropdown-button profile-avatar-button">
-                  <img src="/assets/male.svg" alt="Profile" style={{ width: 28, height: 28, borderRadius: 18 }} />
+                  <img src={(user && user.profilePic) || (counsellor && counsellor.profilePic) || '/assets/male.svg'} alt="Profile" style={{ width: 28, height: 28, borderRadius: 18 }} />
                   {counsellor && <span style={{ marginLeft: 8, fontSize: 14 }}>{(JSON.parse(localStorage.getItem('counsellor') || '{}') || {}).name?.split(' ')[0] || ''}</span>}
                 </button>
                 {showUserDropdown && (

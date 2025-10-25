@@ -53,6 +53,12 @@ export default function DashboardTopNavbar() {
   };
 
   const confirmLogout = () => {
+    try {
+      if (window.socket) {
+        try { window.socket.disconnect(); } catch (e) {}
+        try { window.socket = null; } catch (e) {}
+      }
+    } catch (e) {}
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('counsellor');
@@ -79,7 +85,7 @@ export default function DashboardTopNavbar() {
             {theme === 'light' ? <FiSun /> : <FiMoon />}
           </button>
           <button className="profile-button" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            <img src="/assets/male.svg" alt="User Profile" style={{ width: '36px', height: '36px' }} />
+            <img src={(user && user.profilePic) || (JSON.parse(localStorage.getItem('counsellor') || 'null')?.profilePic) || '/assets/male.svg'} alt="User Profile" style={{ width: '36px', height: '36px', borderRadius: '50%' }} />
             <span>{user?.name ? (user.name.split(' ')[0]) : ''}</span>
           </button>
           <div className={`dropdown-menu ${dropdownOpen ? 'open' : ''}`}>

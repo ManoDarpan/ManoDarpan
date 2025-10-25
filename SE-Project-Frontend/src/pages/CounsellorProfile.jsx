@@ -106,7 +106,7 @@ export default function CounsellorProfile() {
     <div className="counsellor-profile-container">
       <div className="profile-card">
         <div className="profile-header">
-          <img src="/assets/male.svg" alt="avatar" className="profile-avatar" />
+          <img src={(counsellor.profilePic) || '/assets/male.svg'} alt="avatar" className="profile-avatar" />
           <div className="profile-info">
             <h2>{counsellor.name || "Counsellor"}</h2>
             <p>{counsellor.email}</p>

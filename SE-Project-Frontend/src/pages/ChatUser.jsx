@@ -154,8 +154,10 @@ export default function ChatUser() {
     };
     fetchLists();
     
-    const s = io(API_URL, { auth: { token } });
-    setSocket(s);
+  const s = io(API_URL, { auth: { token } });
+  // expose socket globally so navbar/logout can notify server about counsellor offline
+  try { window.socket = s; } catch (e) { /* ignore */ }
+  setSocket(s);
 
     s.on('requestAccepted', (data) => {
       console.debug('[socket] requestAccepted (user):', data);
@@ -432,7 +434,10 @@ export default function ChatUser() {
                     .filter(c => (c.name || c.username || '').toLowerCase().includes(searchQuery.toLowerCase()))
                     .map((c) => (
                     <div key={c._id || c.id} className={`conv-item ${activeStored && convToCounsellorRef.current && convToCounsellorRef.current[activeStored] === c._id ? 'active-stored' : ''}`}>
-                      <img className="item-avatar" src={c.avatar || '/assets/male.svg'} alt="counsellor avatar" />
+                      <div className="avatar-wrap">
+                        <img className="item-avatar" src={(c.profilePic || c.avatar) || '/assets/male.svg'} alt="counsellor avatar" />
+                        {c.isOnline && <span className="online-badge" aria-hidden="true" />}
+                      </div>
                       <div className="item-body">
                         <div className="item-title">{c.name || c.username || 'Counsellor'}</div>
                         <div className="item-sub">{c.areaOfExpertise || ''}</div>
@@ -462,7 +467,7 @@ export default function ChatUser() {
                 <div className="conversations-list">
                   {conversations.filter(cv => (cv.counsellor?.name || cv.counsellor?.username || '').toLowerCase().includes(searchQuery.toLowerCase())).map((cv) => (
                     <div key={cv._id} className={`conv-item ${cv.isActive ? 'active-conv' : ''}`} onClick={() => { setConversationId(cv._id); localStorage.setItem('activeConversationId', cv._id); setSideOpen(false); }}>
-                      <img className="item-avatar" src={cv.counsellor?.avatar || '/assets/male.svg'} alt="counsellor avatar" />
+                      <img className="item-avatar" src={(cv.counsellor?.profilePic || cv.counsellor?.avatar) || '/assets/male.svg'} alt="counsellor avatar" />
                       <div className="item-body">
                         <div className="item-title">{cv.counsellor?.name || cv.counsellor?.username || 'Counsellor'}</div>
                         <div className="item-sub">{cv.isActive ? 'Active' : 'Inactive'}</div>

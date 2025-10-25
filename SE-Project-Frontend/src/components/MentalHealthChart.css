@@ -1,5 +1,35 @@
 .tracker-chart {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+}
+
+/* Remove default focus / tap outlines on interactive chart elements (mobile) */
+.tracker-chart,
+.tracker-chart *,
+.tracker-chart svg,
+.tracker-chart .recharts-wrapper,
+.tracker-chart .recharts-surface,
+.tracker-chart .recharts-layer,
+.tracker-chart canvas {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none !important;
+}
+
+.tracker-chart *:focus,
+.tracker-chart *:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Improve touch behavior */
+.tracker-chart {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
 }

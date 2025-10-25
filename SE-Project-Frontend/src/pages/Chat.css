@@ -245,7 +245,7 @@ body.dark .conv-item:hover, body.dark .request-item:hover {
 .conv-item .item-avatar {
   width: 44px;
   height: 44px;
-  /* border-radius: 10px; */
+  border-radius: 50%;
   object-fit: cover;
   /* border: 1px solid var(--border-color); */
   padding: 4px;
@@ -414,7 +414,7 @@ body.dark .conv-item:hover, body.dark .request-item:hover {
 }
 .chat-actions-row {
   flex: 0 0 auto;
-  border-top: 1px solid var(--border-color);
+  /* border-top: 1px solid var(--border-color); */
 }
 .chat-card .chat-messages {
   padding-bottom: 80px; /* leave space for input area */
@@ -508,9 +508,25 @@ body.dark .chat-message.from-them {
 .chat-avatar {
   width: 44px;
   height: 44px;
-  border-radius: 10px;
+  border-radius: 50%;
   /* border: 1px solid var(--border-color); */
   padding: 6px;
+}
+
+.avatar-wrap {
+  position: relative;
+  display: inline-block;
+}
+.avatar-wrap .online-badge {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #34D399; /* green */
+  border: 2px solid var(--surface-color);
+  box-shadow: 0 0 0 2px rgba(52,211,153,0.12);
 }
 
 .chat-top-name {
