@@ -1,67 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Navbar from './Navbar';
-import DashboardTopNavbar from './DashboardTopNavbar';
-import AnimatedPage from './AnimatedPage';
-import LoginPopup from './LoginPopup';
-import Portal from './Portal';
-import { useLoginPopup } from '../contexts/LoginPopupContext';
+import React, { useState, useEffect } from 'react'; // Import React hooks
+import { Outlet, useLocation } from 'react-router-dom'; // Import router components and hook
+import { AnimatePresence } from 'framer-motion'; // For animation control
+import Navbar from './Navbar'; // Standard (logged out) navigation bar
+import DashboardTopNavbar from './DashboardTopNavbar'; // Logged in top navigation bar
+import AnimatedPage from './AnimatedPage'; // Component wrapper for page transitions
+import LoginPopup from './LoginPopup'; // Login modal component
+import Portal from './Portal'; // Component for rendering modals outside the DOM flow
+import { useLoginPopup } from '../contexts/LoginPopupContext'; // Context for managing login modal state
 
 export default function Layout() {
-  const [, setUser] = useState(null);
-  const location = useLocation();
-  const { showLogin, handleCloseLogin } = useLoginPopup();
+  const [, setUser] = useState(null); // State to hold user data, though only setter is used directly here
+  const location = useLocation(); // Hook to get the current URL location
+  const { showLogin, handleCloseLogin } = useLoginPopup(); // Get login modal state and close handler from context
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    setUser(storedUser ? JSON.parse(storedUser) : null);
+  useEffect(() => {
+    // Initial check for user in localStorage
+    const storedUser = localStorage.getItem('user');
+    setUser(storedUser ? JSON.parse(storedUser) : null);
 
-    const handleStorageChange = () => {
-      const updatedUser = localStorage.getItem('user');
-      setUser(updatedUser ? JSON.parse(updatedUser) : null);
-    };
+    const handleStorageChange = () => {
+      // Handler to update user state if localStorage changes (e.g., in another tab)
+      const updatedUser = localStorage.getItem('user');
+      setUser(updatedUser ? JSON.parse(updatedUser) : null);
+    };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [location]); // Re-check on location change
+    window.addEventListener('storage', handleStorageChange); // Listen for storage events
+    return () => window.removeEventListener('storage', handleStorageChange); // Cleanup
+  }, [location]); // Re-check user status when location changes
 
-  const loggedInRoutes = ['/dashboard', '/journal' , '/library' , '/chat', '/chat-counsellor', '/profile'];
+  const loggedInRoutes = ['/dashboard', '/journal' , '/library' , '/chat', '/chat-counsellor', '/profile']; // Routes requiring a logged-in state
 
-  const isloggedInRoute = loggedInRoutes.some(path => location.pathname.startsWith(path));
+  const isloggedInRoute = loggedInRoutes.some(path => location.pathname.startsWith(path)); // Check if current path starts with any logged-in route
 
-  // hide the sidebar for counsellor-specific pages like counsellor chat and counsellor dashboard
-  const hideSidebarFor = ['/chat-counsellor', '/counsellor-dashboard'];
-  const hideSidebar = hideSidebarFor.some(p => location.pathname.startsWith(p));
+  // hide the sidebar for counsellor-specific pages like counsellor chat and counsellor dashboard
+  const hideSidebarFor = ['/chat-counsellor', '/counsellor-dashboard']; // Routes where the sidebar should be hidden
+  const hideSidebar = hideSidebarFor.some(p => location.pathname.startsWith(p)); // Check if the sidebar should be hidden (variable is defined but not used in the final render logic)
 
-  return (
-    <>
-      {isloggedInRoute ? (
-        <>
-          <DashboardTopNavbar />
-          <main className="dashboard-content">
-            <AnimatePresence mode="wait">
-              <AnimatedPage key={location.pathname}>
-                <Outlet />
-              </AnimatedPage>
-            </AnimatePresence>
-          </main>
-        </>
-      ) : (
-        <>
-          <Navbar />
-          <AnimatePresence mode="wait">
-            <AnimatedPage key={location.pathname}>
-              <Outlet />
-            </AnimatedPage>
-          </AnimatePresence>
-        </>
-      )}
-      {showLogin && (
-        <Portal>
-          <LoginPopup onClose={handleCloseLogin} />
-        </Portal>
-      )}
-    </>
-  );
+  return (
+    <>
+      {isloggedInRoute ? ( // Conditional rendering for logged-in users
+        <>
+          <DashboardTopNavbar /> {/* Logged-in header */}
+          <main className="dashboard-content">
+            <AnimatePresence mode="wait"> {/* Manages exit/enter animations */}
+              <AnimatedPage key={location.pathname}> {/* Provides animation wrapper for each page */}
+                <Outlet /> {/* Renders the current route's component */}
+              </AnimatedPage>
+            </AnimatePresence>
+          </main>
+        </>
+      ) : ( // Conditional rendering for logged-out/public users
+        <>
+          <Navbar /> {/* Standard header */}
+          <AnimatePresence mode="wait">
+            <AnimatedPage key={location.pathname}>
+              <Outlet /> {/* Renders the current public route's component */}
+            </AnimatedPage>
+          </AnimatePresence>
+        </>
+      )}
+      {showLogin && ( // Conditionally renders the Login Popup
+        <Portal> {/* Renders the login modal outside the main layout */}
+          <LoginPopup onClose={handleCloseLogin} />
+        </Portal>
+      )}
+    </>
+  );
 }
