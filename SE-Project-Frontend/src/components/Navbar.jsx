@@ -24,13 +24,34 @@ export default function Navbar() {
   const userDropdownRef = useRef(null);
 
   useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
     const storedCounsellor = localStorage.getItem('counsellor');
     if (storedCounsellor) {
       setCounsellor(JSON.parse(storedCounsellor));
+      // Also fetch fresh data to ensure we have latest profilePic
+      const token = localStorage.getItem('token');
+      if (token) {
+        (async () => {
+          try {
+            const res = await fetch(`${API_URL}/api/counsellors/profile`, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.counsellor) {
+                localStorage.setItem('counsellor', JSON.stringify(data.counsellor));
+                setCounsellor(data.counsellor);
+              }
+            }
+          } catch (e) { /* ignore */ }
+        })();
+      }
     }
   }, []);
 

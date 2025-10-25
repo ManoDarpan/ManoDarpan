@@ -75,12 +75,12 @@
 }
 
 .save-btn {
-  background: var(--primary-color);
+  background: #5a9a78;
   color: white;
 }
 
 .save-btn:hover {
-  background: var(--primary-hover-color);
+  background: #48775e;
 }
 
 .cancel-btn {

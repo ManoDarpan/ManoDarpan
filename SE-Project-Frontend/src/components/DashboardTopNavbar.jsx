@@ -18,12 +18,33 @@ export default function DashboardTopNavbar() {
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
     const storedUser = localStorage.getItem('user');
     const storedCounsellor = localStorage.getItem('counsellor');
+
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else if (storedCounsellor) {
-      setUser(JSON.parse(storedCounsellor));
+      const parsedCounsellor = JSON.parse(storedCounsellor);
+      setUser(parsedCounsellor);
+      // Also fetch fresh data to ensure we have latest profilePic
+      const token = localStorage.getItem('token');
+      if (token) {
+        (async () => {
+          try {
+            const res = await fetch(`${API_URL}/api/counsellors/profile`, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.counsellor) {
+                localStorage.setItem('counsellor', JSON.stringify(data.counsellor));
+                setUser(data.counsellor);
+              }
+            }
+          } catch (e) { /* ignore */ }
+        })();
+      }
     } else {
       navigate('/');
     }

@@ -435,7 +435,7 @@ export default function ChatUser() {
                     .map((c) => (
                     <div key={c._id || c.id} className={`conv-item ${activeStored && convToCounsellorRef.current && convToCounsellorRef.current[activeStored] === c._id ? 'active-stored' : ''}`}>
                       <div className="avatar-wrap">
-                        <img className="item-avatar" src={(c.profilePic || c.avatar) || '/assets/male.svg'} alt="counsellor avatar" />
+                        <img className="item-avatar" src={c.profilePic || '/assets/male.svg'} alt="counsellor avatar" />
                         {c.isOnline && <span className="online-badge" aria-hidden="true" />}
                       </div>
                       <div className="item-body">
@@ -467,7 +467,7 @@ export default function ChatUser() {
                 <div className="conversations-list">
                   {conversations.filter(cv => (cv.counsellor?.name || cv.counsellor?.username || '').toLowerCase().includes(searchQuery.toLowerCase())).map((cv) => (
                     <div key={cv._id} className={`conv-item ${cv.isActive ? 'active-conv' : ''}`} onClick={() => { setConversationId(cv._id); localStorage.setItem('activeConversationId', cv._id); setSideOpen(false); }}>
-                      <img className="item-avatar" src={(cv.counsellor?.profilePic || cv.counsellor?.avatar) || '/assets/male.svg'} alt="counsellor avatar" />
+                      <img className="item-avatar" src={cv.counsellor?.profilePic || '/assets/male.svg'} alt="counsellor avatar" />
                       <div className="item-body">
                         <div className="item-title">{cv.counsellor?.name || cv.counsellor?.username || 'Counsellor'}</div>
                         <div className="item-sub">{cv.isActive ? 'Active' : 'Inactive'}</div>
