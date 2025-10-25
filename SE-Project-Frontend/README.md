@@ -5,7 +5,7 @@
 </div>
 
 <p align="center">
-  <img src="YOUR_DIRECT_IMAGE_LINK" alt="Manodarpan Dashboard" width="800" style="border-radius: 8px; margin: 20px 0;"/>
+  <img src="https://i.ibb.co/Z1WyHPBq/Screenshot-2025-10-25-171246.png" alt="Manodarpan Dashboard" width="800" style="border-radius: 8px; margin: 20px 0;"/>
 </p>
 
 ## 📋 Overview
