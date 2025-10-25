@@ -37,7 +37,3 @@ APIs were tested manually using Postman. Tests covered authentication flows, CRU
 - admin/ — user management, content moderation, analytics  
 - middlewares/ — auth checks, validation, error handlers, rate limiting  
 - utils/ — email, notifications, cron jobs, schedulers
-
-## Notes / Next steps
-- Provide any additional logo image links or preferred sizes if you want changes.  
-- Provide Postman collection (export) to include a direct link.
