@@ -7,9 +7,15 @@
 </p>
 
 <div align="center">
-  
-  [Visit Manodarpan](https://manodarpan.netlify.app/) 
-  
+
+  🔗 [Visit Manodarpan](https://manodarpan.netlify.app/)  
+  <br><br>
+
+  <a href="https://github.com/ManoDarpan/ManoDarpan/releases/download/v-1.0.0/Manodarpan.apk">
+    <img src="https://img.shields.io/badge/Download%20APK-Android-green?style=for-the-badge&logo=android&logoColor=white" 
+         alt="Download Manodarpan APK">
+  </a>
+
 </div>
 
 <h2 style="color: #8E24AA">Mirror to Your Inner Self</h2>
