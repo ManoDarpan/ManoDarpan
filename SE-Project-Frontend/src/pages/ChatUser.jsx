@@ -122,17 +122,9 @@ export default function ChatUser() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
-    // Socket event handlers for counsellor status updates
-    if (socket) {
-      socket.on('counsellorStatusChanged', ({ counsellorId, status }) => {
-        setCounsellors(prev => prev.map(c => {
-          if (c._id === counsellorId) {
-            return { ...c, isOnline: status === 'online' };
-          }
-          return c;
-        }));
-      });
-    }
+    // real-time counsellor status is handled by the socket 'counsellorStatus' handler
+    // which is registered on the newly created socket below. Do not attempt to attach
+    // handlers to a stale `socket` variable here.
 
     const fetchLists = async () => {
       try {
